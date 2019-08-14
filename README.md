@@ -1,29 +1,33 @@
-# luckyapp
+# luckyapp 基于vue开发的抽奖程序-1.0.1
 
-## Project setup
-```
-npm install
-```
+## 主要介绍
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+1.采用vue-cli3.0脚手架搭建,UI库用iview3.0。
 
-### Compiles and minifies for production
-```
-npm run build
-```
+2.数据方面由于只是一个简单的抽奖程序，所以数据的存储直接通过vuex状态管理存储到localstorage里。
 
-### Run your tests
+3.采用canvas来进行抽奖动画的绘制
+
+4.后续功能，有待开发中。
+
+## 开始使用
+
 ```
-npm run test
+npm install 安装依赖包
 ```
 
-### Lints and fixes files
 ```
-npm run lint
+npm run dev   运行
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+```
+npm run build  打包
+```
+
+### 浏览器运行预览
+
+    打开地址 http://localhost:8080
+
+### 项目图片
+
+![image](https://s2.ax1x.com/2019/08/14/miYP5n.png)
