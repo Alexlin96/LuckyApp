@@ -1,0 +1,56 @@
+{
+  // vscode默认启用了根据文件类型自动设置tabsize的选项
+  "editor.detectIndentation": false,
+  // 重新设定tabsize
+  "editor.tabSize": 2,
+  // #每次保存的时候将代码按eslint格式进行修复
+  "eslint.autoFixOnSave": true,
+  // 添加 vue 支持
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    {
+      "language": "vue",
+      "autoFix": true
+    }
+  ],
+  
+  "workbench.iconTheme": "material-icon-theme",
+  "editor.quickSuggestions": {
+    "strings": true
+  },
+  "emmet.triggerExpansionOnTab": true,
+  "emmet.includeLanguages": {
+    "vue-html": "html",
+    "vue": "html"
+  },
+  "git.autofetch": true,
+  "git.enableSmartCommit": true,
+  "search.followSymlinks": false,
+  "explorer.confirmDelete": false,
+  "editor.fontSize": 14,
+  "workbench.colorTheme": "Panda Syntax",
+  "vetur.experimental.templateInterpolationService": false,
+  "vetur.format.defaultFormatter.html": "js-beautify-html",
+  "vetur.format.defaultFormatterOptions": {
+    "js-beautify-html": {
+        "wrap_attributes": "auto"
+    },
+    "prettyhtml": {
+        "printWidth": 100,
+        "singleQuote": false,
+        "wrapAttributes": false,
+        "sortAttributes": false
+    }
+  },
+  "window.zoomLevel": 0,
+  "files.associations": {
+    "*.vue": "vue",
+    "*.tpl": "html"
+  },
+  "polacode.shadow": "rg2f2f2(0, 0, 0, 0.55) 0 20px 68px",
+  "terminal.integrated.rendererType": "dom",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  }
+}
