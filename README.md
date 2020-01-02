@@ -2,7 +2,7 @@
 
 ## 主要介绍
 
-1.采用vue-cli3.0脚手架搭建,UI库用iview3.0。
+1.采用vue-cli脚手架搭建,UI库用iview。
 
 2.数据方面由于只是一个简单的抽奖程序，所以数据的存储直接通过vuex状态管理存储到localstorage里。
 
