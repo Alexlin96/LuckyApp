@@ -1,4 +1,4 @@
-# luckyapp 基于vue开发的抽奖程序-1.1.1
+# luckyapp 基于vue开发的抽奖程序-1.1.2
 
 ## 主要介绍
 
@@ -11,6 +11,8 @@
 4.后续功能，有待开发中。
 
 ### 版本更新内容
+
+1.1.2 增加打包代码分割(optimization.splitChunks)
 
 1.1.1 将脚手架升级为vue-cli4.0,UI库升级为iview4.0 增加网页水印和ESlint代码规范化
 
