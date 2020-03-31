@@ -9,11 +9,20 @@ const BASE_URL = process.env.NODE_ENV === "production" ? "./" : "/";
 module.exports = {
   publicPath: BASE_URL, // 路径
   // outputDir:'dist',  // 打包生成文件的路径
-  // lintOnSave: false,
-  configureWebpack: {}, //在这里可以进行webpack配置 最终会被webpack-merge合并到最终的webpack配置里
+  lintOnSave: false,
+  configureWebpack: {
+    resolve: {
+      alias: {
+        // key,value自行定义，比如.set('@@', resolve('src/components'))
+        "@": resolve("src")
+      }
+    }
+  },
   chainWebpack: config => {
+    config.plugins.delete("preload"); // TODO: need test
+    config.plugins.delete("prefetch"); // TODO: need test
     // 链式操作配置webpack
-    config.resolve.alias.set("@", resolve("src")); // key,value自行定义，比如.set('@@', resolve('src/components'))
+    // config.resolve.alias.set("@", resolve("src")); //
     config
       .plugin("ScriptExtHtmlWebpackPlugin")
       .after("html")
@@ -36,8 +45,8 @@ module.exports = {
         },
         commons: {
           name: "chunk-commons",
-          test: resolve("src/components"),
-          priority: 5
+          test: resolve("@/components"),
+          priority: 30
         }
       }
     });

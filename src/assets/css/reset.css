@@ -45,10 +45,6 @@
       content:'';
   }
   
-  abbr, acronym {
-      /* border: 0; */
-  }
-  
   body {
       font-family: "Hiragino Sans GB","DroidSansFallback","Microsoft YaHei","微软雅黑",arial,simsun;
       color: #333;

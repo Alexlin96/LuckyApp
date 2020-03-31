@@ -245,7 +245,7 @@ export default {
         players = this.baseData.players;
 
       this.$set(this.baseConfig, "running", false);
-      TagCanvas.SetSpeed("myCanvas", this.getSpeed());
+      window.SetSpeed("myCanvas", this.getSpeed());
 
       let total = awards[currentAward].count;
       result[currentAward] = result[currentAward] || [];
@@ -268,12 +268,12 @@ export default {
         { key: "result", value: result }
       ]);
 
-      TagCanvas.Reload("myCanvas");
+      window.TagCanvas.Reload("myCanvas");
     },
     // 打开
     startFn() {
       this.$set(this.baseConfig, "running", true);
-      TagCanvas.SetSpeed("myCanvas", [5, 1]);
+      window.TagCanvas.SetSpeed("myCanvas", [5, 1]);
     },
     // 进入下一轮
     onNext() {
@@ -314,7 +314,7 @@ export default {
     // 初始化
     init() {
       try {
-        TagCanvas.Start("myCanvas", "tags", {
+        window.TagCanvas.Start("myCanvas", "tags", {
           textColour: null,
           dragControl: 1,
           decel: 0.95,

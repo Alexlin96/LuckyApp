@@ -226,6 +226,7 @@ export default {
       });
     },
     touchMoveEvent(e) {
+      e.preventDefault();
       if (!this.isMouseDown) return false;
       const moveX = e.changedTouches[0].pageX - this.originX;
       const moveY = e.changedTouches[0].pageY - this.originY;

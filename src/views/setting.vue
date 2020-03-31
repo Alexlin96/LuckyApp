@@ -1,11 +1,12 @@
 <template>
-  <div class="awards" style="width:900px;margin:0 auto">
+  <div class="awards" :style="{ width: mainWidth + 'px', margin: '0 auto' }">
     <div style="padding:10px">
       <slide-verify
         :l="42"
         :r="10"
         :w="310"
         :h="155"
+        style="margin:auto"
         @success="onSuccess"
         @fail="onFail"
         @refresh="onRefresh"
@@ -179,6 +180,7 @@
 import { getMemberData, getPrizeData } from "@/mock/index";
 import slideVerify from "@/components/slide-Verify";
 import { setTimeout } from "timers";
+import { isMobile } from "@/util/module/util";
 export default {
   name: "setting",
   data() {
@@ -237,6 +239,11 @@ export default {
   components: { slideVerify },
   created() {
     this.initDataConfig();
+  },
+  computed: {
+    mainWidth() {
+      return isMobile() ? "750" : "900";
+    }
   },
   methods: {
     // 初始化操作类
