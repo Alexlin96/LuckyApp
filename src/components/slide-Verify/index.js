@@ -1,3 +1,3 @@
-import slideVerify from "./slide-verify.vue";
+import slideVerify from './slide-verify.vue'
 
-export default slideVerify;
+export default slideVerify

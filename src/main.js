@@ -3,7 +3,11 @@ import App from "./App.vue";
 import { router } from "./router";
 import { store } from "./store";
 import ViewUI from "view-design";
+import "./util/rem";
 import { localstorage, deepCopy, formatDates } from "@/util/index";
+import "./assets/js/tagcanvas.min";
+
+Vue.prototype.TagCanvas = window.TagCanvas;
 
 // css引用
 import "view-design/dist/styles/iview.css";

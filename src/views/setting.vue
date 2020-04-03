@@ -7,15 +7,15 @@
         :w="310"
         :h="155"
         style="margin:auto"
+        :slider-text="'向右滑动'"
         @success="onSuccess"
         @fail="onFail"
         @refresh="onRefresh"
-        :slider-text="'向右滑动'"
-      ></slide-verify>
+      />
     </div>
     <Card shadow>
       <p slot="title">
-        <Icon type="ios-film-outline"></Icon>
+        <Icon type="ios-film-outline" />
         奖项设置
       </p>
       <div slot="extra">
@@ -24,17 +24,13 @@
         >
       </div>
       <div class="l-table">
-        <Table
-          border
-          :columns="awardData.columns"
-          :data="awardData.data"
-        ></Table>
+        <Table border :columns="awardData.columns" :data="awardData.data" />
       </div>
     </Card>
 
     <Card shadow>
       <p slot="title">
-        <Icon type="md-people"></Icon>
+        <Icon type="md-people" />
         参与人员列表(共{{ joinMemberData.data.length }}人)
       </p>
       <div slot="extra">
@@ -47,7 +43,7 @@
           border
           :columns="joinMemberData.columns"
           :data="joinMemberData.showdata"
-        ></Table>
+        />
       </div>
       <div class="pageToolbar">
         <Page
@@ -69,7 +65,7 @@
               this.pagesizeChange(val, joinMemberData);
             }
           "
-        ></Page>
+        />
       </div>
     </Card>
 
@@ -82,7 +78,7 @@
       @on-cancel="closeHandle('formValidate')"
     >
       <p slot="header">
-        <Icon type="md-information-circle" style="color:#19be6b;"></Icon>
+        <Icon type="md-information-circle" style="color:#19be6b;" />
         <span>{{
           `${awardData.popMadol.type === "add" ? "添加" : "编辑"}`
         }}</span>
@@ -97,23 +93,23 @@
         >
           <FormItem label="名称：" prop="name">
             <Input
+              v-model="awardData.popMadol.data.name"
               placeholder="请输入名称"
               type="text"
-              v-model="awardData.popMadol.data.name"
             />
           </FormItem>
           <FormItem label="数量：" prop="count">
             <Input
+              v-model="awardData.popMadol.data.count"
               placeholder="请输入数量"
               type="text"
-              v-model="awardData.popMadol.data.count"
             />
           </FormItem>
           <FormItem label="奖品：" prop="award">
             <Input
+              v-model="awardData.popMadol.data.award"
               placeholder="请输入奖品"
               type="text"
-              v-model="awardData.popMadol.data.award"
             />
           </FormItem>
         </Form>
@@ -134,7 +130,7 @@
       @on-cancel="closeHandle('joinMemberDataDOM')"
     >
       <p slot="header">
-        <Icon type="md-information-circle" style="color:#19be6b;"></Icon>
+        <Icon type="md-information-circle" style="color:#19be6b;" />
         <span>{{
           `${joinMemberData.popMadol.type === "add" ? "添加" : "编辑"}`
         }}</span>
@@ -149,16 +145,16 @@
         >
           <FormItem label="姓名：" prop="name">
             <Input
+              v-model="joinMemberData.popMadol.data.name"
               placeholder="请输入姓名"
               type="text"
-              v-model="joinMemberData.popMadol.data.name"
             />
           </FormItem>
           <FormItem label="工号：" prop="count">
             <Input
+              v-model="joinMemberData.popMadol.data.id"
               placeholder="请输入数量"
               type="text"
-              v-model="joinMemberData.popMadol.data.id"
             />
           </FormItem>
         </Form>
@@ -182,7 +178,8 @@ import slideVerify from "@/components/slide-Verify";
 import { setTimeout } from "timers";
 import { isMobile } from "@/util/module/util";
 export default {
-  name: "setting",
+  name: "Setting",
+  components: { slideVerify },
   data() {
     return {
       awardData: {
@@ -236,14 +233,13 @@ export default {
       }
     };
   },
-  components: { slideVerify },
-  created() {
-    this.initDataConfig();
-  },
   computed: {
     mainWidth() {
       return isMobile() ? "750" : "900";
     }
+  },
+  created() {
+    this.initDataConfig();
   },
   methods: {
     // 初始化操作类
@@ -254,8 +250,8 @@ export default {
     },
     // 初始化表头
     initTableColumn() {
-      let awardDataColumns = [],
-        joinMemberDataColumns = [];
+      let awardDataColumns = [];
+      let joinMemberDataColumns = [];
 
       awardDataColumns = [
         {
@@ -413,9 +409,9 @@ export default {
     },
     // 初始化表格数据
     initTableData() {
-      let localstorage = this.localstorage;
-      let prizeData = [],
-        memberData = [];
+      const localstorage = this.localstorage;
+      let prizeData = [];
+      let memberData = [];
 
       localstorage.fetch("menber").length
         ? (memberData = localstorage.fetch("menber"))
@@ -449,8 +445,8 @@ export default {
     },
     // 分页显示数据
     changepage(listdata) {
-      let _start = (listdata.offset - 1) * listdata.limit,
-        _end = listdata.offset * listdata.limit;
+      const _start = (listdata.offset - 1) * listdata.limit;
+      const _end = listdata.offset * listdata.limit;
       this.$set(listdata, "showdata", listdata.data.slice(_start, _end));
     },
     // 分页点击选择
@@ -466,11 +462,11 @@ export default {
     // 奖项增删改查操作
     // 添加、编辑奖项操作
     updateAwardFun(type, row) {
-      let awardDataPop = this.awardData.popMadol;
+      const awardDataPop = this.awardData.popMadol;
       this.$set(awardDataPop, "type", type);
       this.$set(awardDataPop, "show", true);
       if (type === "edit") {
-        let newData = {
+        const newData = {
           name: row.name,
           count: row.count,
           award: row.award
@@ -486,7 +482,7 @@ export default {
         content: "<p>是否要删除这条数据？</p>",
         onOk: () => {
           setTimeout(() => {
-            let awardData = this.awardData.data;
+            const awardData = this.awardData.data;
             awardData.forEach((item, index) => {
               if (
                 `${item["name"]}${item["award"]}` ===
@@ -509,12 +505,12 @@ export default {
       this.$refs[name].validate(valid => {
         if (valid) {
           if (name === "formValidate") {
-            let awardData = this.awardData.data;
-            let awardDataPop = this.awardData.popMadol;
-            let datas = this.awardData.popMadol.data;
+            const awardData = this.awardData.data;
+            const awardDataPop = this.awardData.popMadol;
+            const datas = this.awardData.popMadol.data;
             if (awardDataPop.type === "edit" && awardDataPop.key) {
               awardData.forEach((item, index) => {
-                if (`${item["name"]}${item["award"]}` == awardDataPop.key) {
+                if (`${item["name"]}${item["award"]}` === awardDataPop.key) {
                   awardData.splice(index, 1, datas); // 替换
                 }
               });
@@ -526,14 +522,13 @@ export default {
             this.saveDataCommitFn([
               { key: "prize", value: this.awardData.data }
             ]);
-            (awardData = null), (awardDataPop = null), (datas = null);
           } else if (name === "joinMemberDataDOM") {
-            let memberData = this.joinMemberData.data;
-            let memberDataPop = this.joinMemberData.popMadol;
-            let datas = this.joinMemberData.popMadol.data;
+            const memberData = this.joinMemberData.data;
+            const memberDataPop = this.joinMemberData.popMadol;
+            const datas = this.joinMemberData.popMadol.data;
             if (memberDataPop.type === "edit" && memberDataPop.key) {
               memberData.forEach((item, index) => {
-                if (item["id"] == memberDataPop.key) {
+                if (item["id"] === memberDataPop.key) {
                   memberData.splice(index, 1, datas); // 替换
                 }
               });
@@ -545,7 +540,6 @@ export default {
             this.saveDataCommitFn([
               { key: "menber", value: this.joinMemberData.data }
             ]);
-            (memberData = null), (memberDataPop = null), (datas = null);
           }
           this.initTableData();
           this.closeHandle(name);
@@ -566,11 +560,11 @@ export default {
     // 参与人员增删改查操作
     // 添加、编辑参与人员操作
     updateMemberFun(type, row) {
-      let memberDataPop = this.joinMemberData.popMadol;
+      const memberDataPop = this.joinMemberData.popMadol;
       this.$set(memberDataPop, "type", type);
       this.$set(memberDataPop, "show", true);
       if (type === "edit") {
-        let newData = {
+        const newData = {
           name: row.name,
           id: row.id
         };
@@ -585,7 +579,7 @@ export default {
         content: "<p>是否要删除这条数据？</p>",
         onOk: () => {
           setTimeout(() => {
-            let joinMemberData = this.joinMemberData.data;
+            const joinMemberData = this.joinMemberData.data;
             joinMemberData.forEach((item, index) => {
               if (`${item["id"]}` === `${row["id"]}`) {
                 joinMemberData.splice(index, 1);
