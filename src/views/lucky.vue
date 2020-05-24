@@ -1,14 +1,7 @@
 <template>
-  <div
-    ref="luckbody"
-    class="lucky bg"
-    :style="{ width: mainWidth }"
-  >
+  <div ref="luckbody" class="lucky bg" :style="{ width: mainWidth }">
     <!-- 奖品  start-->
-    <Divider
-      v-if="baseData.awards.length > 0"
-      class="lucky-title"
-    >
+    <Divider v-if="baseData.awards.length > 0" class="lucky-title">
       <span class="title">
         {{
           `${baseData.awards[baseConfig.currentAward].name}(${
@@ -38,10 +31,7 @@
         {{ item.name }}
       </div>
     </div>
-    <div
-      v-show="baseData.batchPlayers.length === 0"
-      class="result"
-    >
+    <div v-show="baseData.batchPlayers.length === 0" class="result">
       <div
         v-for="(item, index) in baseData.result[baseData.currentAward]"
         :key="index"
@@ -54,12 +44,7 @@
 
     <!-- canvas start -->
     <div id="myCanvasContainer">
-      <canvas
-        id="myCanvas"
-        ref="canvas"
-        width="300"
-        height="300"
-      >
+      <canvas id="myCanvas" ref="canvas" width="300" height="300">
         <p>当前浏览器不支持，大哥请换个现代浏览器吧！</p>
       </canvas>
     </div>
@@ -67,26 +52,15 @@
 
     <div id="tags">
       <ul>
-        <li
-          v-for="(tag, index) in baseData.members"
-          :key="index"
-        >
-          <a
-            href="#"
-            target="_blank"
-          >{{ tag.name }}</a>
+        <li v-for="(tag, index) in baseData.members" :key="index">
+          <a href="#" target="_blank">{{ tag.name }}</a>
         </li>
       </ul>
     </div>
 
     <!-- 操作 start -->
-    <Row>
-      <Col
-        :xs="24"
-        :sm="24"
-        :md="18"
-        :lg="12"
-      />
+    <!-- <Row>
+      <Col :xs="24" :sm="24" :md="18" :lg="12"/>
       <Select
         v-model="baseConfig.currentAward"
         style="width:200px"
@@ -99,7 +73,7 @@
         >{{ item.name }}</Option>
       </Select>
       </Col>
-    </Row>
+    </Row> -->
     <div class="buttons">
       <Select
         v-model="baseConfig.currentAward"
@@ -110,20 +84,23 @@
           v-for="(item, index) in baseData.awards"
           :key="index"
           :value="index"
-        >{{ item.name }}</Option>
+          >{{ item.name }}</Option
+        >
       </Select>
       <Button
         type="info"
         size="default"
         :disabled="isDisabled"
         @click.prevent.native="toggleStatus"
-      >{{ buttonText }}</Button>
+        >{{ buttonText }}</Button
+      >
       <Button
         type="warning"
         size="default"
         :disabled="goNext || baseConfig.running"
         @click.prevent.native="onNext"
-      >{{ `下一轮` }}</Button>
+        >{{ `下一轮` }}</Button
+      >
       <Button
         type="error"
         size="default"
@@ -140,9 +117,9 @@
 </template>
 
 <script>
-import { isMobile } from '@/util/module/util'
+import { isMobile } from "@/util/module/util";
 export default {
-  name: 'Lucky',
+  name: "Lucky",
   data() {
     return {
       baseConfig: {
@@ -157,227 +134,227 @@ export default {
         batchPlayers: [],
         result: [] // 结果
       }
-    }
+    };
   },
   computed: {
     mainWidth() {
-      return isMobile() ? '750px' : '100%'
+      return isMobile() ? "750px" : "100%";
     },
     // 按钮是否禁用
     isDisabled() {
-      const awards = this.baseData.awards
-      const result = this.baseData.result
-      const currentAward = this.baseConfig.currentAward
-      const players = this.baseData.players
+      const awards = this.baseData.awards;
+      const result = this.baseData.result;
+      const currentAward = this.baseConfig.currentAward;
+      const players = this.baseData.players;
 
       return (
         result[currentAward].length >= awards[currentAward].count ||
         players.length === 0
-      )
+      );
     },
     // 是否继续
     goNext() {
-      const awards = this.baseData.awards
-      const result = this.baseData.result
-      const currentAward = this.baseConfig.currentAward
+      const awards = this.baseData.awards;
+      const result = this.baseData.result;
+      const currentAward = this.baseConfig.currentAward;
 
       return (
         result[currentAward].length < awards[currentAward].count &&
         result[currentAward].length > 0
-      )
+      );
     },
     // 按钮状态
     buttonText() {
-      if (this.baseConfig.running) return '停止'
-      if (this.goNext) return '继续'
-      return '开始'
+      if (this.baseConfig.running) return "停止";
+      if (this.goNext) return "继续";
+      return "开始";
     }
   },
   created() {
-    this.initDataFn() // 数据初始化
+    this.initDataFn(); // 数据初始化
   },
   mounted() {
-    this.otherInit()
-    this.initCanvansSize()
+    this.otherInit();
+    this.initCanvansSize();
   },
   destroyed() {
-    window.onresize = null
+    window.onresize = null;
   },
   methods: {
     // 初始化
     initDataFn() {
-      const localstorage = this.localstorage
+      const localstorage = this.localstorage;
 
-      const awards = localstorage.fetch('prize').length
-        ? localstorage.fetch('prize')
-        : []
+      const awards = localstorage.fetch("prize").length
+        ? localstorage.fetch("prize")
+        : [];
       if (awards.length == 0) {
-        this.$router.replace({ path: '/setting' }) // 跳转回设置页面
+        this.$router.replace({ path: "/setting" }); // 跳转回设置页面
       }
-      this.$set(this.baseData, 'awards', awards)
+      this.$set(this.baseData, "awards", awards);
 
-      const result = localstorage.fetch('result').length
-        ? localstorage.fetch('result')
-        : []
+      const result = localstorage.fetch("result").length
+        ? localstorage.fetch("result")
+        : [];
       awards.length &&
         awards.forEach((item, index) => {
-          result[index] = result[index] || []
-        })
-      this.$set(this.baseData, 'result', result)
+          result[index] = result[index] || [];
+        });
+      this.$set(this.baseData, "result", result);
     },
     otherInit() {
-      const localstorage = this.localstorage
+      const localstorage = this.localstorage;
 
-      const members = localstorage.fetch('menber').length
-        ? localstorage.fetch('menber')
-        : []
-      this.$set(this.baseData, 'members', members)
+      const members = localstorage.fetch("menber").length
+        ? localstorage.fetch("menber")
+        : [];
+      this.$set(this.baseData, "members", members);
 
-      const players = localstorage.fetch('players').length
-        ? localstorage.fetch('players')
-        : members
-      this.$set(this.baseData, 'players', players)
-      this.$store.commit('saveLocalstorage', [
-        { key: 'players', value: players }
-      ])
+      const players = localstorage.fetch("players").length
+        ? localstorage.fetch("players")
+        : members;
+      this.$set(this.baseData, "players", players);
+      this.$store.commit("saveLocalstorage", [
+        { key: "players", value: players }
+      ]);
     },
     // canvans初始化
     initCanvansSize() {
-      const that = this
+      const that = this;
       window.onresize = () => {
         // 窗口变化监听事件
         if (!that.timer) {
-          const canvas = that.$refs.canvas
-          canvas.width = document.body.offsetWidth
-          canvas.height = document.body.offsetHeight
-          that.timer = true
+          const canvas = that.$refs.canvas;
+          canvas.width = document.body.offsetWidth;
+          canvas.height = document.body.offsetHeight;
+          that.timer = true;
           setTimeout(() => {
-            that.timer = false
-          }, 100)
+            that.timer = false;
+          }, 100);
         }
-      }
-      const canvas = this.$refs.canvas
-      canvas.width = document.body.offsetWidth
-      canvas.height = document.body.offsetHeight
+      };
+      const canvas = this.$refs.canvas;
+      canvas.width = document.body.offsetWidth;
+      canvas.height = document.body.offsetHeight;
       setTimeout(() => {
-        this.init()
-      })
+        this.init();
+      });
     },
     // 状态操作类
     // 下拉选中
     selectFun() {
-      this.baseData.batchPlayers.splice(0)
+      this.baseData.batchPlayers.splice(0);
     },
     // 切换状态
     toggleStatus() {
-      const isRunning = this.baseConfig.running
+      const isRunning = this.baseConfig.running;
       if (isRunning) {
-        this.stopFn() // 停止
+        this.stopFn(); // 停止
       } else {
-        this.startFn() // 打开
+        this.startFn(); // 打开
       }
     },
     // 停止
     stopFn() {
-      const awards = this.baseData.awards
-      const result = this.baseData.result
-      const currentAward = this.baseConfig.currentAward
-      const players = this.baseData.players
+      const awards = this.baseData.awards;
+      const result = this.baseData.result;
+      const currentAward = this.baseConfig.currentAward;
+      const players = this.baseData.players;
 
-      this.$set(this.baseConfig, 'running', false)
-      this.TagCanvas.SetSpeed('myCanvas', this.getSpeed())
+      this.$set(this.baseConfig, "running", false);
+      this.TagCanvas.SetSpeed("myCanvas", this.getSpeed());
 
-      const total = awards[currentAward].count
-      result[currentAward] = result[currentAward] || []
+      const total = awards[currentAward].count;
+      result[currentAward] = result[currentAward] || [];
 
-      const todo = total - result[currentAward].length // 剩余人数
-      const batchNumber = this.baseConfig.batchNumber // 抽奖人数
-      const batchPlayers = [] // 记录中奖人员
-      const len = Math.min(players.length, batchNumber, todo) // 参与人员 抽奖设置值 剩余人数 选最小的
+      const todo = total - result[currentAward].length; // 剩余人数
+      const batchNumber = this.baseConfig.batchNumber; // 抽奖人数
+      const batchPlayers = []; // 记录中奖人员
+      const len = Math.min(players.length, batchNumber, todo); // 参与人员 抽奖设置值 剩余人数 选最小的
       for (let i = 0; i < len; i++) {
-        const index = this.getRandomInt(0, players.length - 1)
-        batchPlayers.push(players.splice(index, 1)[0])
+        const index = this.getRandomInt(0, players.length - 1);
+        batchPlayers.push(players.splice(index, 1)[0]);
       }
-      this.$set(this.baseData, 'batchPlayers', batchPlayers) // 保存
+      this.$set(this.baseData, "batchPlayers", batchPlayers); // 保存
 
-      result.splice(currentAward, 1, result[currentAward].concat(batchPlayers))
+      result.splice(currentAward, 1, result[currentAward].concat(batchPlayers));
 
       // 保存到vuex
-      this.$store.commit('saveLocalstorage', [
-        { key: 'players', value: players },
-        { key: 'result', value: result }
-      ])
+      this.$store.commit("saveLocalstorage", [
+        { key: "players", value: players },
+        { key: "result", value: result }
+      ]);
 
-      this.TagCanvas.Reload('myCanvas')
+      this.TagCanvas.Reload("myCanvas");
     },
     // 打开
     startFn() {
-      this.$set(this.baseConfig, 'running', true)
-      this.TagCanvas.SetSpeed('myCanvas', [5, 1])
+      this.$set(this.baseConfig, "running", true);
+      this.TagCanvas.SetSpeed("myCanvas", [5, 1]);
     },
     // 进入下一轮
     onNext() {
-      this.baseData.batchPlayers.splice(0)
-      const currentAward = this.baseConfig.currentAward
-      const awards = this.baseData.awards
-      currentAward < awards.length - 1 && this.baseConfig.currentAward++
+      this.baseData.batchPlayers.splice(0);
+      const currentAward = this.baseConfig.currentAward;
+      const awards = this.baseData.awards;
+      currentAward < awards.length - 1 && this.baseConfig.currentAward++;
 
       currentAward >= awards.length - 1 &&
-        this.$set(this.baseConfig, 'currentAward', 0)
+        this.$set(this.baseConfig, "currentAward", 0);
     },
     // 重新抽取
     onReplay() {
       this.$Modal.confirm({
-        title: '提示！',
-        content: '<p>是否要重新抽奖？</p>',
+        title: "提示！",
+        content: "<p>是否要重新抽奖？</p>",
         onOk: () => {
           setTimeout(() => {
-            this.baseData.batchPlayers.splice(0)
+            this.baseData.batchPlayers.splice(0);
             const p = this.baseData.result.splice(
               this.baseConfig.currentAward,
               1,
               []
-            ) // 从结果中删除当前奖抽到的人
-            this.baseData.players = this.baseData.players.concat(p[0]) // 将人员还原到参与人员的名单中
+            ); // 从结果中删除当前奖抽到的人
+            this.baseData.players = this.baseData.players.concat(p[0]); // 将人员还原到参与人员的名单中
             // 保存到vuex
-            this.$store.commit('saveLocalstorage', [
-              { key: 'players', value: this.baseData.players },
-              { key: 'result', value: this.baseData.result }
-            ])
-            this.$Message.success('操作成功!')
-          }, 300)
+            this.$store.commit("saveLocalstorage", [
+              { key: "players", value: this.baseData.players },
+              { key: "result", value: this.baseData.result }
+            ]);
+            this.$Message.success("操作成功!");
+          }, 300);
         }
-      })
+      });
     },
     // canvas 配置类
     // 初始化
     init() {
       try {
-        this.TagCanvas.Start('myCanvas', 'tags', {
+        this.TagCanvas.Start("myCanvas", "tags", {
           textColour: null,
           dragControl: 1,
           decel: 0.95,
           textHeight: 14,
           minSpeed: 0.01,
           initial: [0.1 * Math.random() + 0.01, -(0.1 * Math.random() + 0.01)]
-        })
+        });
       } catch (e) {
         // something went wrong, hide the canvas container
-        document.getElementById('myCanvasContainer').style.display = 'none'
+        document.getElementById("myCanvasContainer").style.display = "none";
       }
     },
     // 抽中随机数
     getRandomInt(min, max) {
-      min = Math.ceil(min)
-      max = Math.floor(max)
-      return Math.floor(Math.random() * (max - min + 1)) + min
+      min = Math.ceil(min);
+      max = Math.floor(max);
+      return Math.floor(Math.random() * (max - min + 1)) + min;
     },
     // 获取随机速度
     getSpeed: function() {
-      return [0.1 * Math.random() + 0.01, -(0.1 * Math.random() + 0.01)]
+      return [0.1 * Math.random() + 0.01, -(0.1 * Math.random() + 0.01)];
     }
   }
-}
+};
 </script>
 
 <style lang="less" scoped>
