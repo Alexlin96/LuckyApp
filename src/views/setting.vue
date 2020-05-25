@@ -19,9 +19,10 @@
         奖项设置
       </p>
       <div slot="extra">
-        <Button type="info" @click.prevent.native="updateAwardFun('add')"
-          >添加</Button
-        >
+        <Button
+          type="info"
+          @click.prevent.native="updateAwardFun('add')"
+        >添加</Button>
       </div>
       <div class="l-table">
         <Table border :columns="awardData.columns" :data="awardData.data" />
@@ -34,9 +35,10 @@
         参与人员列表(共{{ joinMemberData.data.length }}人)
       </p>
       <div slot="extra">
-        <Button type="info" @click.prevent.native="updateMemberFun('add')"
-          >添加</Button
-        >
+        <Button
+          type="info"
+          @click.prevent.native="updateMemberFun('add')"
+        >添加</Button>
       </div>
       <div class="l-table">
         <Table
@@ -160,12 +162,14 @@
         </Form>
       </div>
       <div slot="footer">
-        <Button type="success" @click="saveHandle('joinMemberDataDOM')"
-          >确定</Button
-        >
-        <Button type="info" @click="closeHandle('joinMemberDataDOM')"
-          >取消</Button
-        >
+        <Button
+          type="success"
+          @click="saveHandle('joinMemberDataDOM')"
+        >确定</Button>
+        <Button
+          type="info"
+          @click="closeHandle('joinMemberDataDOM')"
+        >取消</Button>
       </div>
     </Modal>
     <!--参与人员 添加编辑模态框end -->
@@ -173,12 +177,12 @@
 </template>
 
 <script>
-import { getMemberData, getPrizeData } from "@/mock/index";
-import slideVerify from "@/components/slide-Verify";
-import { setTimeout } from "timers";
-import { isMobile } from "@/util/module/util";
+import { getMemberData, getPrizeData } from '@/mock/index'
+import slideVerify from '@/components/slide-Verify'
+import { setTimeout } from 'timers'
+import { isMobile } from '@/util/module/util'
 export default {
-  name: "Setting",
+  name: 'Setting',
   components: { slideVerify },
   data() {
     return {
@@ -186,13 +190,13 @@ export default {
         columns: [],
         data: [],
         popMadol: {
-          type: "",
-          key: "",
+          type: '',
+          key: '',
           data: {
-            key: "",
-            name: "",
-            count: "",
-            award: ""
+            key: '',
+            name: '',
+            count: '',
+            award: ''
           },
           show: false
         }
@@ -206,64 +210,64 @@ export default {
         limit: 20,
         pageSize: [20, 50, 100, 200, 500],
         popMadol: {
-          type: "",
-          key: "",
+          type: '',
+          key: '',
           data: {
-            key: "",
-            name: "",
-            id: ""
+            key: '',
+            name: '',
+            id: ''
           },
           show: false
         }
       },
       formValidate: {
         // 验证
-        name: [{ required: true, message: "名称不能为空", trigger: "blur" }],
+        name: [{ required: true, message: '名称不能为空', trigger: 'blur' }],
         // count:[
         //     { required: true, type: 'number', message: '数量不能为空', trigger: 'blur' }
         // ],
         award: [
-          { required: true, message: "奖品名称不能为空", trigger: "blur" }
+          { required: true, message: '奖品名称不能为空', trigger: 'blur' }
         ]
       },
       joinMemberDataDOM: {
         // 验证
-        name: [{ required: true, message: "名称不能为空", trigger: "blur" }],
-        id: [{ required: true, message: "奖品名称不能为空", trigger: "blur" }]
+        name: [{ required: true, message: '名称不能为空', trigger: 'blur' }],
+        id: [{ required: true, message: '奖品名称不能为空', trigger: 'blur' }]
       }
-    };
+    }
   },
   computed: {
     mainWidth() {
-      return isMobile() ? "750" : "900";
+      return isMobile() ? '750' : '900'
     }
   },
   created() {
-    this.initDataConfig();
+    this.initDataConfig()
   },
   methods: {
     // 初始化操作类
     // 初始化
     initDataConfig() {
-      this.initTableColumn();
-      this.initTableData();
+      this.initTableColumn()
+      this.initTableData()
     },
     // 初始化表头
     initTableColumn() {
-      let awardDataColumns = [];
-      let joinMemberDataColumns = [];
+      let awardDataColumns = []
+      let joinMemberDataColumns = []
 
       awardDataColumns = [
         {
-          type: "selection",
+          type: 'selection',
           width: 60,
-          align: "center",
-          fixed: "left",
+          align: 'center',
+          fixed: 'left',
           resizable: true
         },
-        { title: "名称", key: "name", align: "center", resizable: true },
-        { title: "数量", key: "count", align: "center", resizable: true },
-        { title: "奖品", key: "award", align: "center", resizable: true },
+        { title: '名称', key: 'name', align: 'center', resizable: true },
+        { title: '数量', key: 'count', align: 'center', resizable: true },
+        { title: '奖品', key: 'award', align: 'center', resizable: true },
 
         // { title: "奖品", key:'award', align:'center',
         //     render:(h,params)=>{
@@ -315,300 +319,300 @@ export default {
         // },
 
         {
-          title: "操作",
-          key: "action",
+          title: '操作',
+          key: 'action',
           width: 160,
-          align: "center",
-          fixed: "right",
+          align: 'center',
+          fixed: 'right',
           resizable: true,
           render: (h, params) => {
-            return h("div", [
+            return h('div', [
               h(
-                "Button",
+                'Button',
                 {
-                  props: { type: "primary", size: "small" },
-                  style: { marginRight: "5px" },
+                  props: { type: 'primary', size: 'small' },
+                  style: { marginRight: '5px' },
                   on: {
                     click: () => {
-                      this.updateAwardFun("edit", params.row);
+                      this.updateAwardFun('edit', params.row)
                     }
                   }
                 },
-                "编辑"
+                '编辑'
               ),
               h(
-                "Button",
+                'Button',
                 {
-                  props: { type: "error", size: "small" },
-                  style: { marginRight: "5px" },
+                  props: { type: 'error', size: 'small' },
+                  style: { marginRight: '5px' },
                   on: {
                     click: () => {
-                      this.deleteAwardFun(params.row);
+                      this.deleteAwardFun(params.row)
                     }
                   }
                 },
-                "删除"
+                '删除'
               )
-            ]);
+            ])
           }
         }
-      ];
+      ]
 
       joinMemberDataColumns = [
         {
-          type: "selection",
+          type: 'selection',
           width: 60,
-          align: "center",
-          fixed: "left",
+          align: 'center',
+          fixed: 'left',
           resizable: true
         },
-        { title: "姓名", key: "name", align: "center", resizable: true },
-        { title: "工号", key: "id", align: "center", resizable: true },
+        { title: '姓名', key: 'name', align: 'center', resizable: true },
+        { title: '工号', key: 'id', align: 'center', resizable: true },
         {
-          title: "操作",
-          key: "action",
+          title: '操作',
+          key: 'action',
           width: 160,
-          align: "center",
-          fixed: "right",
+          align: 'center',
+          fixed: 'right',
           resizable: true,
           render: (h, params) => {
-            return h("div", [
+            return h('div', [
               h(
-                "Button",
+                'Button',
                 {
-                  props: { type: "primary", size: "small" },
-                  style: { marginRight: "5px" },
+                  props: { type: 'primary', size: 'small' },
+                  style: { marginRight: '5px' },
                   on: {
                     click: () => {
-                      this.updateMemberFun("edit", params.row);
+                      this.updateMemberFun('edit', params.row)
                     }
                   }
                 },
-                "编辑"
+                '编辑'
               ),
               h(
-                "Button",
+                'Button',
                 {
-                  props: { type: "error", size: "small" },
-                  style: { marginRight: "5px" },
+                  props: { type: 'error', size: 'small' },
+                  style: { marginRight: '5px' },
                   on: {
                     click: () => {
-                      this.deleteMemberFun(params.row);
+                      this.deleteMemberFun(params.row)
                     }
                   }
                 },
-                "删除"
+                '删除'
               )
-            ]);
+            ])
           }
         }
-      ];
+      ]
 
-      this.$set(this.awardData, "columns", awardDataColumns);
-      this.$set(this.joinMemberData, "columns", joinMemberDataColumns);
+      this.$set(this.awardData, 'columns', awardDataColumns)
+      this.$set(this.joinMemberData, 'columns', joinMemberDataColumns)
     },
     // 初始化表格数据
     initTableData() {
-      const localstorage = this.localstorage;
-      let prizeData = [];
-      let memberData = [];
+      const localstorage = this.localstorage
+      let prizeData = []
+      let memberData = []
 
-      localstorage.fetch("menber").length
-        ? (memberData = localstorage.fetch("menber"))
-        : (memberData = getMemberData);
-      localstorage.fetch("prize").length
-        ? (prizeData = localstorage.fetch("prize"))
-        : (prizeData = getPrizeData);
-      this.$set(this.awardData, "data", prizeData);
-      this.$set(this.joinMemberData, "data", memberData);
+      localstorage.fetch('menber').length
+        ? (memberData = localstorage.fetch('menber'))
+        : (memberData = getMemberData)
+      localstorage.fetch('prize').length
+        ? (prizeData = localstorage.fetch('prize'))
+        : (prizeData = getPrizeData)
+      this.$set(this.awardData, 'data', prizeData)
+      this.$set(this.joinMemberData, 'data', memberData)
 
-      this.initPageTableShow(this.joinMemberData);
+      this.initPageTableShow(this.joinMemberData)
 
       this.saveDataCommitFn([
-        { key: "prize", value: this.awardData.data },
-        { key: "menber", value: this.joinMemberData.data }
-      ]);
+        { key: 'prize', value: this.awardData.data },
+        { key: 'menber', value: this.joinMemberData.data }
+      ])
     },
     // vux提交保存数据
     saveDataCommitFn(data) {
-      this.$store.commit("saveLocalstorage", data);
+      this.$store.commit('saveLocalstorage', data)
     },
     // 分页
     // 表格分页初始化
     initPageTableShow(listdata) {
-      this.$set(listdata, "total", listdata.data.length);
+      this.$set(listdata, 'total', listdata.data.length)
       if (listdata.data.length < listdata.limit) {
-        this.$set(listdata, "showdata", listdata.data);
+        this.$set(listdata, 'showdata', listdata.data)
       } else {
-        this.$set(listdata, "showdata", listdata.data.slice(0, listdata.limit));
+        this.$set(listdata, 'showdata', listdata.data.slice(0, listdata.limit))
       }
     },
     // 分页显示数据
     changepage(listdata) {
-      const _start = (listdata.offset - 1) * listdata.limit;
-      const _end = listdata.offset * listdata.limit;
-      this.$set(listdata, "showdata", listdata.data.slice(_start, _end));
+      const _start = (listdata.offset - 1) * listdata.limit
+      const _end = listdata.offset * listdata.limit
+      this.$set(listdata, 'showdata', listdata.data.slice(_start, _end))
     },
     // 分页点击选择
     pagingChange(page, listdata) {
-      this.$set(listdata, "offset", page);
-      this.changepage(listdata);
+      this.$set(listdata, 'offset', page)
+      this.changepage(listdata)
     },
     // 分页操作 获取条数
     pagesizeChange(pageSize, listdata) {
-      this.$set(listdata, "limit", pageSize);
-      if (listdata.offset === 1) this.pagingChange(1, listdata);
+      this.$set(listdata, 'limit', pageSize)
+      if (listdata.offset === 1) this.pagingChange(1, listdata)
     },
     // 奖项增删改查操作
     // 添加、编辑奖项操作
     updateAwardFun(type, row) {
-      const awardDataPop = this.awardData.popMadol;
-      this.$set(awardDataPop, "type", type);
-      this.$set(awardDataPop, "show", true);
-      if (type === "edit") {
+      const awardDataPop = this.awardData.popMadol
+      this.$set(awardDataPop, 'type', type)
+      this.$set(awardDataPop, 'show', true)
+      if (type === 'edit') {
         const newData = {
           name: row.name,
           count: row.count,
           award: row.award
-        };
-        this.$set(awardDataPop, "data", newData);
-        this.$set(awardDataPop, "key", `${row.name}${row.award}`);
+        }
+        this.$set(awardDataPop, 'data', newData)
+        this.$set(awardDataPop, 'key', `${row.name}${row.award}`)
       }
     },
     // 删除奖项操作
     deleteAwardFun(row) {
       this.$Modal.confirm({
-        title: "提示！",
-        content: "<p>是否要删除这条数据？</p>",
+        title: '提示！',
+        content: '<p>是否要删除这条数据？</p>',
         onOk: () => {
           setTimeout(() => {
-            const awardData = this.awardData.data;
+            const awardData = this.awardData.data
             awardData.forEach((item, index) => {
               if (
-                `${item["name"]}${item["award"]}` ===
-                `${row["name"]}${row["award"]}`
+                `${item['name']}${item['award']}` ===
+                `${row['name']}${row['award']}`
               ) {
-                awardData.splice(index, 1);
+                awardData.splice(index, 1)
               }
-            });
+            })
             this.saveDataCommitFn([
-              { key: "prize", value: this.awardData.data }
-            ]);
-            this.$Message.success("删除成功!");
-          }, 300);
+              { key: 'prize', value: this.awardData.data }
+            ])
+            this.$Message.success('删除成功!')
+          }, 300)
         }
-      });
+      })
     },
     // 保存关闭操作
     // 保存奖项操作
     saveHandle(name) {
       this.$refs[name].validate(valid => {
         if (valid) {
-          if (name === "formValidate") {
-            const awardData = this.awardData.data;
-            const awardDataPop = this.awardData.popMadol;
-            const datas = this.awardData.popMadol.data;
-            if (awardDataPop.type === "edit" && awardDataPop.key) {
+          if (name === 'formValidate') {
+            const awardData = this.awardData.data
+            const awardDataPop = this.awardData.popMadol
+            const datas = this.awardData.popMadol.data
+            if (awardDataPop.type === 'edit' && awardDataPop.key) {
               awardData.forEach((item, index) => {
-                if (`${item["name"]}${item["award"]}` === awardDataPop.key) {
-                  awardData.splice(index, 1, datas); // 替换
+                if (`${item['name']}${item['award']}` === awardDataPop.key) {
+                  awardData.splice(index, 1, datas) // 替换
                 }
-              });
-            } else if (awardDataPop.type === "add") {
-              awardData.push(datas);
+              })
+            } else if (awardDataPop.type === 'add') {
+              awardData.push(datas)
             }
-            this.$set(this.awardData, "data", awardData);
+            this.$set(this.awardData, 'data', awardData)
 
             this.saveDataCommitFn([
-              { key: "prize", value: this.awardData.data }
-            ]);
-          } else if (name === "joinMemberDataDOM") {
-            const memberData = this.joinMemberData.data;
-            const memberDataPop = this.joinMemberData.popMadol;
-            const datas = this.joinMemberData.popMadol.data;
-            if (memberDataPop.type === "edit" && memberDataPop.key) {
+              { key: 'prize', value: this.awardData.data }
+            ])
+          } else if (name === 'joinMemberDataDOM') {
+            const memberData = this.joinMemberData.data
+            const memberDataPop = this.joinMemberData.popMadol
+            const datas = this.joinMemberData.popMadol.data
+            if (memberDataPop.type === 'edit' && memberDataPop.key) {
               memberData.forEach((item, index) => {
-                if (item["id"] === memberDataPop.key) {
-                  memberData.splice(index, 1, datas); // 替换
+                if (item['id'] === memberDataPop.key) {
+                  memberData.splice(index, 1, datas) // 替换
                 }
-              });
-            } else if (memberDataPop.type === "add") {
-              memberData.push(datas);
+              })
+            } else if (memberDataPop.type === 'add') {
+              memberData.push(datas)
             }
-            this.$set(this.joinMemberData, "data", memberData);
+            this.$set(this.joinMemberData, 'data', memberData)
 
             this.saveDataCommitFn([
-              { key: "menber", value: this.joinMemberData.data }
-            ]);
+              { key: 'menber', value: this.joinMemberData.data }
+            ])
           }
-          this.initTableData();
-          this.closeHandle(name);
+          this.initTableData()
+          this.closeHandle(name)
         } else {
-          this.$Message.error("验证失败!");
+          this.$Message.error('验证失败!')
         }
-      });
+      })
     },
     // 关闭Modal弹窗 取消操作
     closeHandle(name) {
-      this.$refs[name].resetFields();
-      this.$set(this.awardData.popMadol, "show", false);
-      this.$set(this.awardData.popMadol, "key", "");
-      this.$set(this.joinMemberData.popMadol, "show", false);
-      this.$set(this.joinMemberData.popMadol, "key", "");
+      this.$refs[name].resetFields()
+      this.$set(this.awardData.popMadol, 'show', false)
+      this.$set(this.awardData.popMadol, 'key', '')
+      this.$set(this.joinMemberData.popMadol, 'show', false)
+      this.$set(this.joinMemberData.popMadol, 'key', '')
     },
 
     // 参与人员增删改查操作
     // 添加、编辑参与人员操作
     updateMemberFun(type, row) {
-      const memberDataPop = this.joinMemberData.popMadol;
-      this.$set(memberDataPop, "type", type);
-      this.$set(memberDataPop, "show", true);
-      if (type === "edit") {
+      const memberDataPop = this.joinMemberData.popMadol
+      this.$set(memberDataPop, 'type', type)
+      this.$set(memberDataPop, 'show', true)
+      if (type === 'edit') {
         const newData = {
           name: row.name,
           id: row.id
-        };
-        this.$set(memberDataPop, "data", newData);
-        this.$set(memberDataPop, "key", `${row.id}`);
+        }
+        this.$set(memberDataPop, 'data', newData)
+        this.$set(memberDataPop, 'key', `${row.id}`)
       }
     },
     // 删除参与人员操作
     deleteMemberFun(row) {
       this.$Modal.confirm({
-        title: "提示！",
-        content: "<p>是否要删除这条数据？</p>",
+        title: '提示！',
+        content: '<p>是否要删除这条数据？</p>',
         onOk: () => {
           setTimeout(() => {
-            const joinMemberData = this.joinMemberData.data;
+            const joinMemberData = this.joinMemberData.data
             joinMemberData.forEach((item, index) => {
-              if (`${item["id"]}` === `${row["id"]}`) {
-                joinMemberData.splice(index, 1);
+              if (`${item['id']}` === `${row['id']}`) {
+                joinMemberData.splice(index, 1)
               }
-            });
+            })
             this.saveDataCommitFn([
-              { key: "menber", value: this.joinMemberData.data }
-            ]);
-            this.$Message.success("删除成功!");
-            this.initTableData();
-          }, 300);
+              { key: 'menber', value: this.joinMemberData.data }
+            ])
+            this.$Message.success('删除成功!')
+            this.initTableData()
+          }, 300)
         }
-      });
+      })
     },
 
     // 滑块方法
     // 验证成功
     onSuccess() {
-      this.$Message.success("验证通过，即将跳转");
-      this.$router.replace({ path: "/lucky" }); // 跳转
+      this.$Message.success('验证通过，即将跳转')
+      this.$router.replace({ path: '/lucky' }) // 跳转
     },
     onFail() {
-      this.$Message.error("验证失败，请重试");
+      this.$Message.error('验证失败，请重试')
     },
     onRefresh() {
-      this.$Message.warning("请重新开始验证");
+      this.$Message.warning('请重新开始验证')
     }
   }
-};
+}
 </script>
 
 <style>

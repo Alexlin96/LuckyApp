@@ -81,22 +81,9 @@
 
     <!-- 操作 start -->
     <Row>
-      <Col
-        :xs="24"
-        :sm="24"
-        :md="18"
-        :lg="12"
-      />
-      <Select
-        v-model="baseConfig.currentAward"
-        style="width:200px"
-        on-change="selectFun"
-      >
-        <Option
-          v-for="(item, index) in baseData.awards"
-          :key="index"
-          :value="index"
-        >{{ item.name }}</Option>
+      <Col :xs="24" :sm="24" :md="18" :lg="12">
+      <Select v-model="baseConfig.currentAward" style="width:200px" on-change="selectFun">
+        <Option v-for="(item, index) in baseData.awards" :key="index" :value="index">{{ item.name }}</Option>
       </Select>
       </Col>
     </Row>
@@ -211,7 +198,7 @@ export default {
       const awards = localstorage.fetch('prize').length
         ? localstorage.fetch('prize')
         : []
-      if (awards.length == 0) {
+      if (awards.length === 0) {
         this.$router.replace({ path: '/setting' }) // 跳转回设置页面
       }
       this.$set(this.baseData, 'awards', awards)

@@ -3,8 +3,18 @@ module.exports = {
   env: {
     node: true
   },
-  extends: ["plugin:vue/essential", "@vue/prettier", 'plugin:vue/recommended', 'eslint:recommended'],
+  extends: ["plugin:vue/essential", 'plugin:vue/recommended', 'eslint:recommended'],
   rules: {
+    "vue/html-self-closing": ["error", {
+      "html": {
+          "void": "never",
+          "normal": "any",
+          "component": "any"
+      },
+      "svg": "always",
+      "math": "always"
+    }],
+    "vue/no-parsing-error": [2, { "x-invalid-end-tag": false }], // 自闭合标签
     "no-console": process.env.NODE_ENV === "production" ? "error" : "off", // 只有开发环境可以使用console
     "no-debugger": process.env.NODE_ENV === "production" ? "error" : "off", // 只有开发环境可以使用debugger
     "vue/singleline-html-element-content-newline": "off", //单行html元素内容在新的一行
@@ -45,6 +55,17 @@ module.exports = {
     'indent': [2, 2, { // 缩进风格
       'SwitchCase': 1
     }],
+    "vue/html-indent": [
+      "error",
+      2,
+      {
+        attribute: 1,
+        baseIndent: 1,
+        closeBracket: 0,
+        alignAttributesVertically: true,
+        ignores: []
+      }
+    ],
     'jsx-quotes': [2, 'prefer-single'], // 对所有不包含单引号的JSX属性值强制使用单引号
     'key-spacing': [2, { // 强制在对象字面量属性中的键和值之间保持一致的间距
       'beforeColon': false,
@@ -95,6 +116,13 @@ module.exports = {
     'no-multi-str': 2, // 防止使用多行字符串
     'no-multiple-empty-lines': [2, { // 最多一个空行
       'max': 1
+    }],
+    "vue/max-attributes-per-line": [2, { // 强制每行的最大属性数
+      "singleline": 10, // 当开始标记在一行中时，每行的最大属性数
+      "multiline": { // 当开始标记位于多行中时，每行的最大属性数
+        "max": 1,
+        "allowFirstLine": false
+      }
     }],
     'no-native-reassign': 2, // 不允许修改只读全局变量
     'no-new-object': 2, // 不允许使用Object构造函数
