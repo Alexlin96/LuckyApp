@@ -2,7 +2,15 @@
 export const routers = [
   {
     path: '/',
-    redirect: '/setting'
+    redirect: '/home'
+  },
+  {
+    path: '/home',
+    title: '主页',
+    name: 'home',
+    component: resolve => {
+      require(['@/views/home/home.vue'], resolve)
+    }
   },
   {
     path: '/setting',

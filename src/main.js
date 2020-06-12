@@ -6,6 +6,7 @@ import ViewUI from 'view-design'
 import './util/rem'
 import { localstorage, deepCopy, formatDates } from '@/util/index'
 import './assets/js/tagcanvas.min'
+import './assets/js/log'
 
 Vue.prototype.TagCanvas = window.TagCanvas
 

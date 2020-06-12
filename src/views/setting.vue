@@ -59,12 +59,12 @@
           :page-size="joinMemberData.limit"
           @on-change="
             val => {
-              this.pagingChange(val, joinMemberData);
+              pagingChange(val, joinMemberData);
             }
           "
           @on-page-size-change="
             val => {
-              this.pagesizeChange(val, joinMemberData);
+              pagesizeChange(val, joinMemberData);
             }
           "
         />
@@ -603,7 +603,7 @@ export default {
     // 验证成功
     onSuccess() {
       this.$Message.success('验证通过，即将跳转')
-      this.$router.replace({ path: '/lucky' }) // 跳转
+      this.$router.push({ path: '/lucky' }) // 跳转
     },
     onFail() {
       this.$Message.error('验证失败，请重试')

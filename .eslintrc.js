@@ -15,7 +15,7 @@ module.exports = {
       "math": "always"
     }],
     "vue/no-parsing-error": [2, { "x-invalid-end-tag": false }], // 自闭合标签
-    "no-console": process.env.NODE_ENV === "production" ? "error" : "off", // 只有开发环境可以使用console
+    // "no-console": process.env.NODE_ENV === "production" ? "error" : "off", // 只有开发环境可以使用console
     "no-debugger": process.env.NODE_ENV === "production" ? "error" : "off", // 只有开发环境可以使用debugger
     "vue/singleline-html-element-content-newline": "off", //单行html元素内容在新的一行
     "vue/multiline-html-element-content-newline":"off", // 多行html元素内容在新的一行
